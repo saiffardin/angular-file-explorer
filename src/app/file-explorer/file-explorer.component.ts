@@ -13,8 +13,8 @@ import { FileElement } from './model/file-element';
 export class FileExplorerComponent {
   constructor(public dialog: MatDialog) {}
 
-  @Input() fileElements!: FileElement[];
-  @Input() canNavigateUp!: string;
+  @Input() fileElements!: FileElement[] | null;
+  @Input() canNavigateUp!: boolean;
   @Input() path!: string;
 
   @Output() folderAdded = new EventEmitter<{ name: string }>();
