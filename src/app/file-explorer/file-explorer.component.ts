@@ -13,6 +13,14 @@ import { FileElement } from './model/file-element';
 export class FileExplorerComponent {
   constructor(public dialog: MatDialog) {}
 
+  /**
+   * All this component does is...
+   * receive an array of FileElements and display them.
+   * Once the user takes action,
+   * the component fires an event
+   * to notify the parent component.
+   */
+
   @Input() fileElements!: FileElement[] | null;
   @Input() canNavigateUp!: boolean;
   @Input() path!: string;
