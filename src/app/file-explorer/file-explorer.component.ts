@@ -25,7 +25,10 @@ export class FileExplorerComponent {
   @Input() canNavigateUp!: boolean;
   @Input() path!: string;
 
-  @Output() folderAdded = new EventEmitter<{ name: string }>();
+  @Output() folderAdded = new EventEmitter<{
+    name: string;
+    isFolder: boolean;
+  }>();
   @Output() elementRemoved = new EventEmitter<FileElement>();
   @Output() elementRenamed = new EventEmitter<FileElement>();
   @Output() elementMoved = new EventEmitter<{
@@ -57,7 +60,11 @@ export class FileExplorerComponent {
     let dialogRef = this.dialog.open(NewFolderDialogComponent);
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.folderAdded.emit({ name: res });
+        let isFolder = res.indexOf('.') > 0 ? false : true;
+        console.log('isFolder:', isFolder);
+
+        this.folderAdded.emit({ name: res, isFolder });
+        console.log('res:', res);
       }
     });
   }
@@ -75,5 +82,9 @@ export class FileExplorerComponent {
   openMenu(event: MouseEvent, viewChild: MatMenuTrigger) {
     event.preventDefault();
     viewChild.openMenu();
+  }
+
+  saifClicked(event:any) {
+      console.log('saifClicked',event)
   }
 }

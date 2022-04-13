@@ -16,11 +16,12 @@ export class AppComponent {
 
   constructor(public fileService: FileService) {}
 
-  addFolder(folder: { name: string }) {
+  addFolder(folder: { name: string,isFolder:boolean }) {
+    console.log('folder:', folder);
     this.fileService.add({
-      isFolder: true,
+      isFolder: folder.isFolder,
       name: folder.name,
-      parent: this.currentRoot ? this.currentRoot.id !: 'root',
+      parent: this.currentRoot ? this.currentRoot.id! : 'root',
     });
     this.updateFileElementQuery();
   }
